@@ -60,6 +60,8 @@ Variable names shall start with "UserApp1_" and be declared as static.
 static fnCode_type UserApp1_StateMachine;            /* The state machine function pointer */
 //static u32 UserApp1_u32Timeout;                      /* Timeout counter used across states */
 
+static u8 UserApp1_au8IdleMessage[] = "SYSTEM IDLE";
+
 
 /**********************************************************************************************************************
 Function Definitions
@@ -87,10 +89,11 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
- 
   /* If good initialization, set state to Idle */
   if( 1 )
   {
+    LCDClearChars(LINE1_START_ADDR, 40);
+    LCDMessage(LINE1_START_ADDR, UserApp1_au8IdleMessage);
     UserApp1_StateMachine = UserApp1SM_Idle;
   }
   else
@@ -138,6 +141,10 @@ static void UserApp1SM_Idle(void)
 {
   static bool button0Active = FALSE;
   static bool button1Active = FALSE;
+  static u8 (*au8CurrentMessage)[] = &UserApp1_au8IdleMessage;
+  static u8 (*au8LastMessage)[] = &UserApp1_au8IdleMessage;
+  static u8 au8UpMessage[] = "TILTING UP";
+  static u8 au8DownMessage[] = "TILTING DOWN";
   
   // button 0 controls tilting UP. Should not actuate if button 1 is also being pressed
   /* start button 0  */
@@ -149,6 +156,8 @@ static void UserApp1SM_Idle(void)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_SODR) + 0x80;
       //Turn Actuator ON
       *pu32SetAddress = PB_05_ACTUATOR_UP;
+      
+      au8CurrentMessage = &au8UpMessage;
     }
   }
   else {
@@ -171,6 +180,8 @@ static void UserApp1SM_Idle(void)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_SODR) + 0x80;
       //Turn Actuator ON
       *pu32SetAddress = PB_08_ACTUATOR_DOWN;
+      
+      au8CurrentMessage = &au8DownMessage;
     }
   }
   else {
@@ -182,6 +193,18 @@ static void UserApp1SM_Idle(void)
       *pu32SetAddress = PB_08_ACTUATOR_DOWN;
   }
   /* end button 1 */
+  
+  /* if system is idle, set idle message */
+  if (!button0Active && !button1Active) {
+      au8CurrentMessage = &UserApp1_au8IdleMessage;
+  }
+  
+  /* if screen message has
+  if(au8CurrentMessage != au8LastMessage) {
+      LCDClearChars(LINE1_START_ADDR, 40);
+      LCDMessage(LINE1_START_ADDR, *au8CurrentMessage);
+      au8LastMessage = au8CurrentMessage;
+  }
   
 } /* end UserApp1SM_Idle() */
     
