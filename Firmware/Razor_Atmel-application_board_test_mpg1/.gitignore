@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c080c694e6eb3b5db5c649699ab09d322b1ac0ae
+*.pbi
+*.cout
+firmware_mpgl2/iar_7_20_1/Debug/Obj/mpgl2-efmw-01.pbd.browse
+*.pbd
+*.browse
+*.i
+=======
+>>>>>>> refs/remotes/origin/master
+Debug/
+<<<<<<< HEAD
+*.dep
+*.bat
+*.TMP
+*.wspos
+=======
+*.TMP
+>>>>>>> c080c694e6eb3b5db5c649699ab09d322b1ac0ae
