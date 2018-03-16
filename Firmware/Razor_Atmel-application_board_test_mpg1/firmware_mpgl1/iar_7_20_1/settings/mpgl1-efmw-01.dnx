@@ -13,7 +13,7 @@
     </Stack>
     <DebugChecksum>
         <A>======</A>
-        <Checksum>1974564194</Checksum>
+        <Checksum>3412216994</Checksum>
     </DebugChecksum>
     <JLinkDriver>
         <WatchCond>_ 0</WatchCond>

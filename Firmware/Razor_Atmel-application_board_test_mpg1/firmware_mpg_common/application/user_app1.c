@@ -101,8 +101,8 @@ void UserApp1Initialize(void)
     AT91C_BASE_PWMC_CH2->PWMC_CMR = PWM_CMR2_INIT;
     AT91C_BASE_PWMC_CH2->PWMC_CPRDR    = PWM_CPRD2_INIT;
     AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = PWM_CPRD2_INIT;
-    AT91C_BASE_PWMC_CH1->PWMC_CDTYR    = PWM_CDTY2_INIT; /* initialize with 5% duty -> should correspond to 0 degrees */
-    AT91C_BASE_PWMC_CH1->PWMC_CDTYUPDR = PWM_CDTY2_INIT; /* Latch CDTY values */
+    AT91C_BASE_PWMC_CH2->PWMC_CDTYR    = PWM_CDTY2_INIT; /* initialize with 5% duty -> should correspond to 0 degrees */
+    AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = PWM_CDTY2_INIT; /* Latch CDTY values */
     
     AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
   }
@@ -157,6 +157,7 @@ static void UserApp1SM_Idle(void)
   static u8 au8DownMessage[] = "TILTING DOWN";
   
   static u32 currentServoDty = PWM_CDTY2_INIT;
+  static u32 currentServoPeriod = PWM_CPRD2_INIT;
   
   
   
@@ -174,13 +175,17 @@ static void UserApp1SM_Idle(void)
       au8CurrentMessage = &au8UpMessage;  
     }
         //For DEMO only -> increase servo angle
-    if(currentServoDty < (PWM_CDTY2_MAX)) {
+    if(currentServoDty < (PWM_CDTY2_MAX + 1)) {
       currentServoDty= currentServoDty + 1;
       
       AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
-      AT91C_BASE_PWMC_CH1->PWMC_CDTYR = currentServoDty;
+      AT91C_BASE_PWMC_CH2->PWMC_CDTYR = currentServoDty;
       AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = currentServoDty; 
       AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
+    }
+    else {
+      u8 au8MaxUP[] = "MAX UP";
+      au8CurrentMessage = &au8MaxUP;
     }
   }
   else {
@@ -208,13 +213,17 @@ static void UserApp1SM_Idle(void)
       
       
     }
-    if(currentServoDty > (PWM_CDTY2_MIN)) {
+    if(currentServoDty > (PWM_CDTY2_MIN - 1)) {
       currentServoDty = currentServoDty - 1;
       
       AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
-      AT91C_BASE_PWMC_CH1->PWMC_CDTYR = currentServoDty;
+      AT91C_BASE_PWMC_CH2->PWMC_CDTYR = currentServoDty;
       AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = currentServoDty; 
       AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
+    }
+    else {
+      u8 au8MaxDOWN[] = "MAX DOWN";
+      au8CurrentMessage = &au8MaxDOWN;
     }
   }
   else {
@@ -237,6 +246,31 @@ static void UserApp1SM_Idle(void)
       LCDClearChars(LINE1_START_ADDR, 40);
       LCDMessage(LINE1_START_ADDR, *au8CurrentMessage);
       au8LastMessage = au8CurrentMessage;
+  }
+  
+  
+  if(WasButtonPressed(BUTTON2)) {
+    ButtonAcknowledge(BUTTON2);
+    if(currentServoPeriod < PWM_CPRD2_MAX ) {
+      currentServoPeriod = currentServoPeriod + 500;
+      
+      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
+      
+      AT91C_BASE_PWMC_CH2->PWMC_CPRDR = currentServoPeriod;
+      AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = currentServoPeriod; 
+      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
+    }
+  }
+  if(WasButtonPressed(BUTTON3)) {
+    ButtonAcknowledge(BUTTON3);
+    if(currentServoPeriod > PWM_CPRD2_MIN ) {
+      currentServoPeriod = currentServoPeriod - 500;
+      
+      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
+      AT91C_BASE_PWMC_CH2->PWMC_CPRDR = currentServoPeriod;
+      AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = currentServoPeriod; 
+      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
+    } 
   }
   
 } /* end UserApp1SM_Idle() */

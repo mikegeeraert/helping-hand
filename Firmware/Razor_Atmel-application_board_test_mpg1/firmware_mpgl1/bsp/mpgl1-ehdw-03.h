@@ -1190,7 +1190,7 @@ Initial output values are stored here.
 0: No effect
 1: Enables Multi Drive on the I/O line.
 */
-#define PIOA_MDER_INIT (u32)0x04000600
+#define PIOA_MDER_INIT (u32)0x04000640
 /* 
     31 [0] PA_31_HEARTBEAT
     30 [0] PA_30_AN_DEMO
@@ -1223,7 +1223,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_SERVO
+    06 [1] PA_06_SERVO open drain
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -2174,7 +2174,7 @@ $$$$$ PWM and Timer setup values
 
 #define PWM_CMR0_INIT (u32)0x00000004
 #define PWM_CMR1_INIT (u32)0x00000004
-#define PWM_CMR2_INIT (u32)0x00000006 //servo clock is scaled by 16 unlike the buzzers 
+#define PWM_CMR2_INIT AT91C_PWMC_CPRE_MCK_DIV_16 //servo clock is scaled by 16 unlike the buzzers 
 /*
     31 [0] Reserved
     30 [0] "
@@ -2234,7 +2234,7 @@ Set the default period for audio on channel 1 as 1/4kHz
 
 SERVO: Since we need a PWM period of 20 ms for the servo, we need to scale the clock by 16:
 48Mhz/16 = 3MHz
-Set the period for servo on channel 2 as 20kHz
+Set the period for servo on channel 2 at 50hz
 20ms at 3MHz = 60, 000 ticks
 Set the initial duty cycle for the servo on channel 2 as 500 micro seconds
 500us/20ms * 60 000 ticks -> 1, 500 ticks
@@ -2248,10 +2248,12 @@ In general, the period is 6000000 / frequency and duty is always period / 2.
 #define PWM_CDTY1_INIT  (u32)(PWM_CPRD1_INIT << 1)
 
 //Init values for servo - want a 20ms period and a 500 us duty cycle
+#define PWM_CPRD2_MAX   (u32)65000
+#define PWM_CPRD2_MIN   (u32)40000
 #define PWM_CPRD2_INIT  (u32)60000
-#define PWM_CDTY2_MAX   (u32)7500 
-#define PWM_CDTY2_MIN   (u32)1500
-#define PWM_CDTY2_INIT  (u32)4000
+#define PWM_CDTY2_MAX   (u32)8000
+#define PWM_CDTY2_MIN   (u32)3700
+#define PWM_CDTY2_INIT  (u32)6000
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
