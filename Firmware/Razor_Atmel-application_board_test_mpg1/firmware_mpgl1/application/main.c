@@ -67,7 +67,6 @@ void main(void)
   ButtonInitialize();
   AntInitialize();
   AntApiInitialize();
-  SdCardInitialize();
 
   /* Application initialization */
   BoardTestInitialize();
@@ -97,7 +96,6 @@ void main(void)
     LcdRunActiveState();
     AntRunActiveState();
     AntApiRunActiveState();
-    SdCardRunActiveState();
 
     /* Applications */
     //BoardTestRunActiveState();

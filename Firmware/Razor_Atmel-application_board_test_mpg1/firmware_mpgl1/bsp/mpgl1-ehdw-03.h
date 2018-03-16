@@ -409,7 +409,7 @@ counter must be set at 1280. */
 #define PA_09_I2C_SDA            (u32)0x00000200
 #define PA_08_SD_CS_MCDA3        (u32)0x00000100
 #define PA_07_HSMCI_MCDA2        (u32)0x00000080
-#define PA_06_HSMCI_MCDA1        (u32)0x00000040
+#define PA_06_SERVO              (u32)0x00000040
 #define PA_05_HSMCI_MCDA0        (u32)0x00000020
 #define PA_04_HSMCI_MCCDA        (u32)0x00000010
 #define PA_03_HSMCI_MCCK         (u32)0x00000008
@@ -443,8 +443,8 @@ counter must be set at 1280. */
 #define PB_10_LCD_BL_RED        (u32)0x00000400
 #define PB_09_LCD_RST           (u32)0x00000200
 #define PB_08_ACTUATOR_DOWN     (u32)0x00000100 
-#define PB_07_TP60              (u32)0x00000080
-#define PB_06_ACTUATOR_DOWN     (u32)0x00000040
+#define PB_07_SERVO             (u32)0x00000080
+#define PB_06_TP60              (u32)0x00000040
 #define PB_05_ACTUATOR_UP       (u32)0x00000020
 #define PB_04_BLADE_AN1         (u32)0x00000010
 #define PB_03_BLADE_AN0         (u32)0x00000008
@@ -499,7 +499,7 @@ counter must be set at 1280. */
     08 [0] PA_08_SD_CS_MCDA3 PIO control not enabled
 
     07 [0] PA_07_HSMCI_MCDA2 PIO control not enabled
-    06 [0] PA_06_HSMCI_MCDA1 PIO control not enabled
+    06 [0] PA_06_SERVO PIO control not enabled
     05 [0] PA_05_HSMCI_MCDA0 PIO control not enabled
     04 [0] PA_04_HSMCI_MCCDA PIO control not enabled
 
@@ -590,7 +590,7 @@ counter must be set at 1280. */
     08 [1] PA_08_SD_CS_MCDA3 controlled by peripheral
 
     07 [1] PA_07_HSMCI_MCDA2 controlled by peripheral
-    06 [1] PA_06_HSMCI_MCDA1 controlled by peripheral
+    06 [1] PA_06_SERVO controlled by peripheral
     05 [1] PA_05_HSMCI_MCDA0 controlled by peripheral
     04 [1] PA_04_HSMCI_MCCDA controlled by peripheral
 
@@ -681,7 +681,7 @@ Configures the pin as an output or input.
     08 [1] PA_08_SD_CS_MCDA3 output enabled
 
     07 [1] PA_07_HSMCI_MCDA2 output enabled
-    06 [1] PA_06_HSMCI_MCDA1 output enabled
+    06 [1] PA_06_SERVO output enabled
     05 [1] PA_05_HSMCI_MCDA0 output enabled
     04 [1] PA_04_HSMCI_MCCDA output enabled
 
@@ -771,7 +771,7 @@ Configures the pin as an output or input.
     08 [0] PA_08_SD_CS_MCDA3 output 
 
     07 [0] PA_07_HSMCI_MCDA2 output 
-    06 [0] PA_06_HSMCI_MCDA1 output 
+    06 [0] PA_06_SERVO output 
     05 [0] PA_05_HSMCI_MCDA0 output 
     04 [0] PA_04_HSMCI_MCCDA output 
 
@@ -861,7 +861,7 @@ Configures the pin as an output or input.
     08 [0] PA_08_SD_CS_MCDA3 no glitch filter
 
     07 [0] PA_07_HSMCI_MCDA2 no glitch filter
-    06 [0] PA_06_HSMCI_MCDA1 no glitch filter
+    06 [0] PA_06_SERVO no glitch filter
     05 [0] PA_05_HSMCI_MCDA0 no glitch filter
     04 [0] PA_04_HSMCI_MCCDA no glitch filter
 
@@ -951,7 +951,7 @@ Configures the pin as an output or input.
     08 [0] PA_08_SD_CS_MCDA3 no input filter
 
     07 [0] PA_07_HSMCI_MCDA2 no input filter
-    06 [0] PA_06_HSMCI_MCDA1 no input filter
+    06 [0] PA_06_SERVO no input filter
     05 [0] PA_05_HSMCI_MCDA0 no input filter
     04 [0] PA_04_HSMCI_MCCDA no input filter
 
@@ -1042,7 +1042,7 @@ Default start-up IO values are held here.
     08 [0] PA_08_SD_CS_MCDA3 N/A
 
     07 [0] PA_07_HSMCI_MCDA2 N/A
-    06 [0] PA_06_HSMCI_MCDA1 N/A
+    06 [0] PA_06_SERVO output low
     05 [0] PA_05_HSMCI_MCDA0 N/A
     04 [0] PA_04_HSMCI_MCCDA N/A
 
@@ -1100,7 +1100,7 @@ Initial output values are stored here.
 0: No effect
 1: Clears the data to be driven on the I/O line.
 */
-#define PIOA_CODR_INIT (u32)0x30000000
+#define PIOA_CODR_INIT (u32)0x30000040
 /* 
     31 [0] PA_31_HEARTBEAT output high 
     30 [0] PA_30_AN_DEMO N/A
@@ -1133,7 +1133,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3 N/A
 
     07 [0] PA_07_HSMCI_MCDA2 N/A
-    06 [0] PA_06_HSMCI_MCDA1 N/A
+    06 [1] PA_06_SERVO output low
     05 [0] PA_05_HSMCI_MCDA0 N/A
     04 [0] PA_04_HSMCI_MCCDA N/A
 
@@ -1223,7 +1223,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_HSMCI_MCDA1
+    06 [0] PA_06_SERVO
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -1313,7 +1313,7 @@ Initial output values are stored here.
     08 [1] PA_08_SD_CS_MCDA3 not open drain
 
     07 [1] PA_07_HSMCI_MCDA2 not open drain
-    06 [1] PA_06_HSMCI_MCDA1 not open drain
+    06 [1] PA_06_SERVO not open drain
     05 [1] PA_05_HSMCI_MCDA0 not open drain
     04 [1] PA_04_HSMCI_MCCDA not open drain
 
@@ -1403,7 +1403,7 @@ Initial output values are stored here.
     08 [1] PA_08_SD_CS_MCDA3 no pull-up
 
     07 [1] PA_07_HSMCI_MCDA2 no pull-up
-    06 [1] PA_06_HSMCI_MCDA1 no pull-up
+    06 [1] PA_06_SERVO no pull-up
     05 [1] PA_05_HSMCI_MCDA0 no pull-up
     04 [1] PA_04_HSMCI_MCCDA no pull-up
 
@@ -1493,7 +1493,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3 no pull-up
 
     07 [0] PA_07_HSMCI_MCDA2 no pull-up
-    06 [0] PA_06_HSMCI_MCDA1 no pull-up
+    06 [0] PA_06_SERVO no pull-up
     05 [0] PA_05_HSMCI_MCDA0 no pull-up
     04 [0] PA_04_HSMCI_MCCDA no pull-up
 
@@ -1551,7 +1551,7 @@ Initial output values are stored here.
 0: Assigns the I/O line to the Peripheral A function.
 1: Assigns the I/O line to the Peripheral B function.
 */
-#define PIOA_ABSR_INIT (u32)0x7B000000
+#define PIOA_ABSR_INIT (u32)0x7B000040
 /* 
     31 [0] PA_31_HEARTBEAT N/A
     30 [1] PA_30_AN_DEMO PERIPHERAL B
@@ -1584,7 +1584,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3 PERIPHERAL A
 
     07 [0] PA_07_HSMCI_MCDA2 PERIPHERAL A
-    06 [0] PA_06_HSMCI_MCDA1 PERIPHERAL A
+    06 [1] PA_06_SERVO PERIPHERAL B
     05 [0] PA_05_HSMCI_MCDA0 PERIPHERAL A
     04 [0] PA_04_HSMCI_MCCDA PERIPHERAL A
 
@@ -1674,7 +1674,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_HSMCI_MCDA1
+    06 [0] PA_06_SERVO
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -1764,7 +1764,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_HSMCI_MCDA1
+    06 [0] PA_06_SERVO
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -1874,7 +1874,7 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
 0: No effect
 1: Enables writing PIO_ODSR for the I/O line.
 */
-#define PIOA_OWER_INIT (u32)0xB4010000
+#define PIOA_OWER_INIT (u32)0xB4010040
 /* 
     31 [1] PA_31_HEARTBEAT write enabled
     30 [0] PA_30_AN_DEMO
@@ -1907,7 +1907,7 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_HSMCI_MCDA1
+    06 [1] PA_06_SERVO write enabled
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -1998,7 +1998,7 @@ For now, don't worry about explictly disabling any write capability.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [0] PA_06_HSMCI_MCDA1
+    06 [0] PA_06_SERVO
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -2119,12 +2119,12 @@ $$$$$ PWM and Timer setup values
 */
 
 
-#define PWM_ENA_INIT (u32)0x00000003
+#define PWM_ENA_INIT (u32)0x00000007
 /*
     31 - 4 [0] Reserved
 
     03 [0] Channel 3 not enabled
-    02 [0] Channel 2 not enabled
+    02 [1] Channel 2 enabled
     01 [1] Channel 1 enabled
     00 [1] Channel 0 enabled
 */
@@ -2172,8 +2172,9 @@ $$$$$ PWM and Timer setup values
     00 [0] SYNC0 not synchronous
 */
 
-#define PWM_CMR0_INIT (u32)0x00000003
-#define PWM_CMR1_INIT (u32)0x00000003
+#define PWM_CMR0_INIT (u32)0x00000004
+#define PWM_CMR1_INIT (u32)0x00000004
+#define PWM_CMR2_INIT (u32)0x00000006 //servo clock is scaled by 16 unlike the buzzers 
 /*
     31 [0] Reserved
     30 [0] "
@@ -2231,6 +2232,13 @@ Set the default period for audio on channel 0 as 1/1kHz
 Set the default period for audio on channel 1 as 1/4kHz
 0.25ms at 6MHz = 1500 (duty = 750)
 
+SERVO: Since we need a PWM period of 20 ms for the servo, we need to scale the clock by 16:
+48Mhz/16 = 3MHz
+Set the period for servo on channel 2 as 20kHz
+20ms at 3MHz = 60, 000 ticks
+Set the initial duty cycle for the servo on channel 2 as 500 micro seconds
+500us/20ms * 60 000 ticks -> 1, 500 ticks
+
 In general, the period is 6000000 / frequency and duty is always period / 2. 
 */
 
@@ -2239,6 +2247,11 @@ In general, the period is 6000000 / frequency and duty is always period / 2.
 #define PWM_CDTY0_INIT  (u32)(PWM_CPRD0_INIT << 1)
 #define PWM_CDTY1_INIT  (u32)(PWM_CPRD1_INIT << 1)
 
+//Init values for servo - want a 20ms period and a 500 us duty cycle
+#define PWM_CPRD2_INIT  (u32)60000
+#define PWM_CDTY2_MAX   (u32)7500 
+#define PWM_CDTY2_MIN   (u32)1500
+#define PWM_CDTY2_INIT  (u32)4000
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/

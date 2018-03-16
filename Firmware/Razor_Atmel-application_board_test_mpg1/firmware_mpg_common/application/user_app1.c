@@ -62,6 +62,7 @@ static fnCode_type UserApp1_StateMachine;            /* The state machine functi
 
 static u8 UserApp1_au8IdleMessage[] = "SYSTEM IDLE";
 
+static u32 UserApp1_servoDty =  PWM_CDTY2_INIT;
 
 /**********************************************************************************************************************
 Function Definitions
@@ -95,6 +96,15 @@ void UserApp1Initialize(void)
     LCDClearChars(LINE1_START_ADDR, 40);
     LCDMessage(LINE1_START_ADDR, UserApp1_au8IdleMessage);
     UserApp1_StateMachine = UserApp1SM_Idle;
+    
+    //Set up PWM Channel 2 for SERVO, which is operated using GPIO -> PA_06 
+    AT91C_BASE_PWMC_CH2->PWMC_CMR = PWM_CMR2_INIT;
+    AT91C_BASE_PWMC_CH2->PWMC_CPRDR    = PWM_CPRD2_INIT;
+    AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = PWM_CPRD2_INIT;
+    AT91C_BASE_PWMC_CH1->PWMC_CDTYR    = PWM_CDTY2_INIT; /* initialize with 5% duty -> should correspond to 0 degrees */
+    AT91C_BASE_PWMC_CH1->PWMC_CDTYUPDR = PWM_CDTY2_INIT; /* Latch CDTY values */
+    
+    AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
   }
   else
   {
@@ -146,6 +156,10 @@ static void UserApp1SM_Idle(void)
   static u8 au8UpMessage[] = "TILTING UP";
   static u8 au8DownMessage[] = "TILTING DOWN";
   
+  static u32 currentServoDty = PWM_CDTY2_INIT;
+  
+  
+  
   // button 0 controls tilting UP. Should not actuate if button 1 is also being pressed
   /* start button 0  */
   if(IsButtonPressed(BUTTON0)) {
@@ -157,7 +171,16 @@ static void UserApp1SM_Idle(void)
       //Turn Actuator ON
       *pu32SetAddress = PB_05_ACTUATOR_UP;
       
-      au8CurrentMessage = &au8UpMessage;
+      au8CurrentMessage = &au8UpMessage;  
+    }
+        //For DEMO only -> increase servo angle
+    if(currentServoDty < (PWM_CDTY2_MAX)) {
+      currentServoDty= currentServoDty + 1;
+      
+      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
+      AT91C_BASE_PWMC_CH1->PWMC_CDTYR = currentServoDty;
+      AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = currentServoDty; 
+      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
     }
   }
   else {
@@ -182,6 +205,16 @@ static void UserApp1SM_Idle(void)
       *pu32SetAddress = PB_08_ACTUATOR_DOWN;
       
       au8CurrentMessage = &au8DownMessage;
+      
+      
+    }
+    if(currentServoDty > (PWM_CDTY2_MIN)) {
+      currentServoDty = currentServoDty - 1;
+      
+      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
+      AT91C_BASE_PWMC_CH1->PWMC_CDTYR = currentServoDty;
+      AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = currentServoDty; 
+      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
     }
   }
   else {
@@ -199,7 +232,7 @@ static void UserApp1SM_Idle(void)
       au8CurrentMessage = &UserApp1_au8IdleMessage;
   }
   
-  /* if screen message has
+  /* if message has changed, update the screen */
   if(au8CurrentMessage != au8LastMessage) {
       LCDClearChars(LINE1_START_ADDR, 40);
       LCDMessage(LINE1_START_ADDR, *au8CurrentMessage);
@@ -207,7 +240,6 @@ static void UserApp1SM_Idle(void)
   }
   
 } /* end UserApp1SM_Idle() */
-    
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */

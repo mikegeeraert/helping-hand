@@ -302,7 +302,6 @@ void PWMSetupAudio(void)
   AT91C_BASE_PWMC_CH1->PWMC_CDTYR    = PWM_CDTY1_INIT; /* Set 50% duty */
   AT91C_BASE_PWMC_CH1->PWMC_CDTYUPDR = PWM_CDTY1_INIT; /* Latch CDTY values */
 
-  
 } /* end PWMSetupAudio() */
 
 
