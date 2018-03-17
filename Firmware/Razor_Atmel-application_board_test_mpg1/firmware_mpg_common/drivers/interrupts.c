@@ -24,6 +24,8 @@ extern volatile u32 G_u32SystemFlags;                              /* From main.
 extern volatile bool G_abButtonDebounceActive[TOTAL_BUTTONS];      /* From buttons.c    */
 extern volatile u32 G_au32ButtonDebounceTimeStart[TOTAL_BUTTONS];  /* From buttons.c    */
 
+extern volatile bool G_LimitSwitchesActive[TOTAL_LIMIT_SWITCHES];    /* From user_app1.c  */
+
 
 /***********************************************************************************************************************
 Global variable definitions with scope limited to this local application.
@@ -235,6 +237,8 @@ void PIOB_IrqHandler(void)
   u32 u32GPIOInterruptSources;
   u32 u32ButtonInterrupts;
   u32 u32CurrentButtonLocation;
+  
+  u32 u32LimitSwitchInterrupts;
 
   /* Grab a snapshot of the current PORTB status flags (clears all flags) */
   u32GPIOInterruptSources  = AT91C_BASE_PIOB->PIO_ISR;
@@ -264,6 +268,17 @@ void PIOB_IrqHandler(void)
       }
     }
   } /* end button interrupt checking */
+  
+  
+  u32LimitSwitchInterrupts = u32GPIOInterruptSources & LIMITSWITCHES;
+  
+  if(u32LimitSwitchInterrupts) {
+    if(u32LimitSwitchInterrupts & PB_08_LIMIT1) {
+      G_LimitSwitchesActive[0] = TRUE;
+    }
+    else if (u32LimitSwitchInterrupts & PB_07_LIMIT2) {
+      G_LimitSwitchesActive[1] = TRUE;
+  }
 
   /* Clear the PIOB pending flag and exit */
   //NVIC->ICPR[0] = (1 << IRQn_PIOB);

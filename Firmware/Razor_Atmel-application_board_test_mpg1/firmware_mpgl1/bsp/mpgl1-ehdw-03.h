@@ -442,8 +442,8 @@ counter must be set at 1280. */
 #define PB_11_LCD_BL_GRN        (u32)0x00000800
 #define PB_10_LCD_BL_RED        (u32)0x00000400
 #define PB_09_LCD_RST           (u32)0x00000200
-#define PB_08_ACTUATOR_DOWN     (u32)0x00000100 
-#define PB_07_SERVO             (u32)0x00000080
+#define PB_08_LIMIT1            (u32)0x00000100 
+#define PB_07_LIMIT2            (u32)0x00000080
 #define PB_06_TP60              (u32)0x00000040
 #define PB_05_ACTUATOR_UP       (u32)0x00000020
 #define PB_04_BLADE_AN1         (u32)0x00000010
@@ -539,9 +539,9 @@ counter must be set at 1280. */
     11 [1] PB_11_LCD_BL_GRN PIO control enabled
     10 [1] PB_10_LCD_BL_RED PIO control enabled
     09 [1] PB_09_LCD_RST PIO control enabled
-    08 [1] PB_08_TP62 PIO control enabled
+    08 [1] PB_08_LIMIT1 PIO control enabled
 
-    07 [1] PB_07_TP60 PIO control enabled
+    07 [1] PB_07_LIMIT2 PIO control enabled
     06 [0] PB_06_TP58 PIO control not enabled
     05 [1] PB_05_TP56 PIO control enabled
     04 [0] PB_04_BLADE_AN1 PIO control not enabled
@@ -630,9 +630,9 @@ counter must be set at 1280. */
     11 [0] PB_11_LCD_BL_GRN not controlled by peripheral
     10 [0] PB_10_LCD_BL_RED not controlled by peripheral
     09 [0] PB_09_LCD_RST not controlled by peripheral
-    08 [0] PB_08_TP62 not controlled by peripheral
+    08 [0] PB_08_LIMIT1 not controlled by peripheral
 
-    07 [0] PB_07_TP60 not controlled by peripheral
+    07 [0] PB_07_LIMIT2 not controlled by peripheral
     06 [1] PB_06_TP58 controlled by peripheral
     05 [0] PB_05_TP56 not controlled by peripheral
     04 [1] PB_04_BLADE_AN1 controlled by peripheral
@@ -691,7 +691,7 @@ Configures the pin as an output or input.
     00 [1] PA_00_TP54 output enabled
 */
 
-#define PIOB_OER_INIT (u32)0x01BFFFE0
+#define PIOB_OER_INIT (u32)0x01BFFE60
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -721,9 +721,9 @@ Configures the pin as an output or input.
     11 [1] PB_11_LCD_BL_GRN output enabled
     10 [1] PB_10_LCD_BL_RED output enabled
     09 [1] PB_09_LCD_RST output enabled
-    08 [1] PB_08_TP62 output enabled
+    08 [0] PB_08_LIMIT1 input
 
-    07 [1] PB_07_TP60 output enabled
+    07 [0] PB_07_LIMIT2 input
     06 [1] PB_06_TP58 output enabled
     05 [1] PB_05_TP56 output enabled
     04 [0] PB_04_BLADE_AN1 input
@@ -781,7 +781,7 @@ Configures the pin as an output or input.
     00 [0] PA_00_TP54 output 
 */
 
-#define PIOB_ODR_INIT (u32)0x0040001F
+#define PIOB_ODR_INIT (u32)0x0040019F
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -811,9 +811,9 @@ Configures the pin as an output or input.
     11 [0] PB_11_LCD_BL_GRN output 
     10 [0] PB_10_LCD_BL_RED output 
     09 [0] PB_09_LCD_RST output 
-    08 [0] PB_08_TP62 output 
+    08 [1] PB_08_LIMIT1 input 
 
-    07 [0] PB_07_TP60 output 
+    07 [1] PB_07_LIMIT2 input 
     06 [0] PB_06_TP58 output 
     05 [0] PB_05_TP56 output 
     04 [1] PB_04_BLADE_AN1 input
@@ -871,7 +871,7 @@ Configures the pin as an output or input.
     00 [0] PA_00_TP54 no glitch filter
 */
 
-#define PIOB_IFER_INIT (u32)0x00000000
+#define PIOB_IFER_INIT (u32)0x00000180
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -901,9 +901,9 @@ Configures the pin as an output or input.
     11 [0] PB_11_LCD_BL_GRN no glitch filter
     10 [0] PB_10_LCD_BL_RED no glitch filter
     09 [0] PB_09_LCD_RST no glitch filter
-    08 [0] PB_08_TP62 no glitch filter
+    08 [1] PB_08_LIMIT1 enable glitch filter
 
-    07 [0] PB_07_TP60 no glitch filter
+    07 [1] PB_07_LIMIT2 enable glitch filter
     06 [0] PB_06_TP58 no glitch filter
     05 [0] PB_05_TP56 no glitch filter
     04 [0] PB_04_BLADE_AN1 no glitch filter
@@ -991,9 +991,9 @@ Configures the pin as an output or input.
     11 [0] PB_11_LCD_BL_GRN no input filter
     10 [0] PB_10_LCD_BL_RED no input filter
     09 [0] PB_09_LCD_RST no input filter
-    08 [0] PB_08_TP62 no input filter
+    08 [0] PB_08_LIMIT1 no input filter
 
-    07 [0] PB_07_TP60 no input filter
+    07 [0] PB_07_LIMIT2 no input filter
     06 [0] PB_06_TP58 no input filter
     05 [0] PB_05_TP56 no input filter
     04 [0] PB_04_BLADE_AN1 no input filter
@@ -1082,9 +1082,9 @@ Default start-up IO values are held here.
     11 [1] PB_11_LCD_BL_GRN output high
     10 [1] PB_10_LCD_BL_RED output high
     09 [1] PB_09_LCD_RST output high
-    08 [0] PB_08_TP62 N/A
+    08 [0] PB_08_LIMIT1 N/A
 
-    07 [0] PB_07_TP60 N/A
+    07 [0] PB_07_LIMIT2 N/A
     06 [0] PB_06_TP58 N/A
     05 [0] PB_05_TP56 N/A
     04 [0] PB_04_BLADE_AN1 N/A
@@ -1173,9 +1173,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN output high
     10 [0] PB_10_LCD_BL_RED output high
     09 [0] PB_09_LCD_RST output high
-    08 [0] PB_08_TP62 N/A
+    08 [0] PB_08_LIMIT1 N/A
 
-    07 [0] PB_07_TP60 N/A
+    07 [0] PB_07_LIMIT2 N/A
     06 [0] PB_06_TP58 N/A
     05 [0] PB_05_TP56 N/A
     04 [0] PB_04_BLADE_AN1 N/A
@@ -1190,7 +1190,7 @@ Initial output values are stored here.
 0: No effect
 1: Enables Multi Drive on the I/O line.
 */
-#define PIOA_MDER_INIT (u32)0x04000640
+#define PIOA_MDER_INIT (u32)0x04000600
 /* 
     31 [0] PA_31_HEARTBEAT
     30 [0] PA_30_AN_DEMO
@@ -1223,7 +1223,7 @@ Initial output values are stored here.
     08 [0] PA_08_SD_CS_MCDA3
 
     07 [0] PA_07_HSMCI_MCDA2
-    06 [1] PA_06_SERVO open drain
+    06 [0] PA_06_SERVO open drain
     05 [0] PA_05_HSMCI_MCDA0
     04 [0] PA_04_HSMCI_MCCDA
 
@@ -1263,9 +1263,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN
     10 [0] PB_10_LCD_BL_RED
     09 [0] PB_09_LCD_RST
-    08 [0] PB_08_TP62
+    08 [0] PB_08_LIMIT1
 
-    07 [0] PB_07_TP60
+    07 [0] PB_07_LIMIT2
     06 [0] PB_06_TP58
     05 [0] PB_05_TP56
     04 [0] PB_04_BLADE_AN1
@@ -1353,9 +1353,9 @@ Initial output values are stored here.
     11 [1] PB_11_LCD_BL_GRN not open drain
     10 [1] PB_10_LCD_BL_RED not open drain
     09 [1] PB_09_LCD_RST not open drain
-    08 [1] PB_08_TP62 not open drain
+    08 [1] PB_08_LIMIT1 not open drain
 
-    07 [1] PB_07_TP60 not open drain
+    07 [1] PB_07_LIMIT2 not open drain
     06 [1] PB_06_TP58 not open drain
     05 [1] PB_05_TP56 not open drain
     04 [1] PB_04_BLADE_AN1 not open drain
@@ -1443,9 +1443,9 @@ Initial output values are stored here.
     11 [1] PB_11_LCD_BL_GRN no pull-up
     10 [1] PB_10_LCD_BL_RED no pull-up
     09 [1] PB_09_LCD_RST no pull-up
-    08 [0] PB_08_TP62 pull-up enabled
+    08 [0] PB_08_LIMIT1 pull-up enabled
 
-    07 [0] PB_07_TP60 pull-up enabled
+    07 [0] PB_07_LIMIT2 pull-up enabled
     06 [1] PB_06_TP58 no pull-up enabled
     05 [0] PB_05_TP56 pull-up enabled
     04 [1] PB_04_BLADE_AN1 no pull-up
@@ -1503,7 +1503,7 @@ Initial output values are stored here.
     00 [1] PA_00_TP54 pull-up enabled
 */
 
-#define PIOB_PPUER_INIT (u32)0x000001C0
+#define PIOB_PPUER_INIT (u32)0x000001A0
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -1533,9 +1533,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN no pull-up
     10 [0] PB_10_LCD_BL_RED no pull-up
     09 [0] PB_09_LCD_RST no pull-up
-    08 [1] PB_08_TP62 pull-up enabled
+    08 [1] PB_08_LIMIT1 pull-up enabled
 
-    07 [1] PB_07_TP60 pull-up enabled
+    07 [1] PB_07_LIMIT2 pull-up enabled
     06 [0] PB_06_TP58 no pull-up enabled
     05 [1] PB_05_TP56 pull-up enabled
     04 [0] PB_04_BLADE_AN1 no pull-up
@@ -1624,9 +1624,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN N/A
     10 [0] PB_10_LCD_BL_RED N/A
     09 [0] PB_09_LCD_RST N/A
-    08 [0] PB_08_TP62 N/A
+    08 [0] PB_08_LIMIT1 PERIPHERAL A
 
-    07 [0] PB_07_TP60 N/A
+    07 [0] PB_07_LIMIT2 PERIPHERAL A
     06 [0] PB_06_TP58 N/A
     05 [0] PB_05_TP56 N/A
     04 [1] PB_04_BLADE_AN1 PERIPHERAL B
@@ -1714,9 +1714,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN
     10 [0] PB_10_LCD_BL_RED
     09 [0] PB_09_LCD_RST
-    08 [0] PB_08_TP62
+    08 [0] PB_08_LIMIT1
 
-    07 [0] PB_07_TP60
+    07 [0] PB_07_LIMIT2
     06 [0] PB_06_TP58
     05 [0] PB_05_TP56
     04 [0] PB_04_BLADE_AN1
@@ -1774,7 +1774,7 @@ Initial output values are stored here.
     00 [0] PA_00_TP54
 */
 
-#define PIOB_DIFSR_INIT (u32)0x00000000
+#define PIOB_DIFSR_INIT (u32)0x00000180
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -1804,9 +1804,9 @@ Initial output values are stored here.
     11 [0] PB_11_LCD_BL_GRN
     10 [0] PB_10_LCD_BL_RED
     09 [0] PB_09_LCD_RST
-    08 [0] PB_08_TP62
+    08 [1] PB_08_LIMIT1 enable debounce filtering
 
-    07 [0] PB_07_TP60
+    07 [1] PB_07_LIMIT2 enable debounce filtering
     06 [0] PB_06_TP58
     05 [0] PB_05_TP56
     04 [0] PB_04_BLADE_AN1
@@ -1917,7 +1917,7 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
     00 [0] PA_00_TP54
 */
 
-#define PIOB_OWER_INIT (u32)0x01FFFE0
+#define PIOB_OWER_INIT (u32)0x01FFFE00
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -1947,9 +1947,9 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
     11 [1] PB_11_LCD_BL_GRN write enabled
     10 [1] PB_10_LCD_BL_RED write enabled
     09 [1] PB_09_LCD_RST write enabled
-    08 [0] PB_08_TP62
+    08 [0] PB_08_LIMIT1
 
-    07 [0] PB_07_TP60
+    07 [0] PB_07_LIMIT2
     06 [0] PB_06_TP58
     05 [0] PB_05_TP56
     04 [0] PB_04_BLADE_AN1
@@ -2038,9 +2038,9 @@ For now, don't worry about explictly disabling any write capability.
     11 [0] PB_11_LCD_BL_GRN
     10 [0] PB_10_LCD_BL_RED
     09 [0] PB_09_LCD_RST
-    08 [0] PB_08_TP62
+    08 [0] PB_08_LIMIT1
 
-    07 [0] PB_07_TP60
+    07 [0] PB_07_LIMIT2
     06 [0] PB_06_TP58
     05 [0] PB_05_TP56
     04 [0] PB_04_BLADE_AN1
@@ -2049,6 +2049,550 @@ For now, don't worry about explictly disabling any write capability.
     02 [0] PB_02_BUTTON3
     01 [0] PB_01_BUTTON2
     00 [0] PB_00_BUTTON1
+*/
+
+/* PIO Additional Interrupt Modes Enable Register
+0: No effect
+1: Enables additional interrupt modes
+*/
+#define PIOA_AIMER_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_AIMER_INIT (u32)0x00000180
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [1] PB_08_LIMIT1 enable additional interrupt modes
+
+    07 [1] PB_07_LIMIT2 enable additional interrupt modes
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
+*/
+
+/* PIO Additional Interrupt Modes Disable Register
+0: No effect
+1: Disables additional interrupt modes
+*/
+#define PIOA_AIMDR_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_AIMDR_INIT (u32)0x00000000
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [0] PB_08_LIMIT1 additional interrup modes enabled
+
+    07 [0] PB_07_LIMIT2 additional interrup modes enabled
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
+*/    
+      
+/* PIO Edge Select Register
+If the AIMER register value is 1, this register is used to select edge detection
+0: No effect
+1: Selects edge detection interrupts
+*/
+#define PIOA_ESR_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_ESR_INIT (u32)0x00000180
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [1] PB_08_LIMIT1 select edge detection
+
+    07 [1] PB_07_LIMIT2 select edge detection
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
+*/
+
+/* PIO Level Select Register
+If the AIMER register value is 1, this register is used to select level detection
+0: No effect
+1: Selects level detection interrupts
+*/
+#define PIOA_LSR_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_LSR_INIT (u32)0x00000000
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [0] PB_08_LIMIT1 N/A
+
+    07 [0] PB_07_LIMIT2 N/A
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
+*/
+
+/* PIO Falling Edge/Low Level Select Register
+If the AIMER register value is 1, this register is used to select falling edge or low level detection
+0: No effect
+1: Selects Falling edge or Low Level detection, depending on the values in PIO_ESR and PIO_LSR registers
+*/
+#define PIOA_FELLSR_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_FELLSR_INIT (u32)0x00000180
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [1] PB_08_LIMIT1 select falling edge detection
+
+    07 [1] PB_07_LIMIT2 select falling edge detection
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
+*/
+
+/* PIO Falling Edge/Low Level Select Register
+If the AIMER register value is 1, this register is used to select rising edge or high level detection
+0: No effect
+1: Selects rising edge or high level detection, depending on the values in PIO_ESR and PIO_LSR registers
+*/
+#define PIOA_REHLSR_INIT (u32)0x00000000
+/* 
+    31 [0] PA_31_HEARTBEAT N/A
+    30 [0] PA_30_AN_DEMO N/A
+    29 [0] PA_29_BUZZER2 N/A
+    28 [0] PA_28_BUZZER1 N/A
+
+    27 [0] PA_27_CLOCK_OUT N/A
+    26 [0] PA_26_ANT_PWR_EN N/A
+    25 [0] PA_25_ANT_USPI2_SCK N/A
+    24 [0] PA_24_SD_USPI1_SCK N/A
+
+    23 [0] PA_23_ANT_USPI2_MOSI N/A
+    22 [0] PA_22_ANT_USPI2_MISO N/A
+    21 [0] PA_21_SD_USPI1_MISO N/A
+    20 [0] PA_20_SD_USPI1_MOSI N/A
+
+    19 [0] PA_19_DEBUG_U0_PIMO N/A
+    18 [0] PA_18_DEBUG_U0_POMI N/A
+    17 [0] PA_17_BUTTON0 N/A
+    16 [0] PA_16_BLADE_CS N/A
+
+    15 [0] PA_15_BLADE_SCK N/A
+    14 [0] PA_14_BLADE_MOSI N/A
+    13 [0] PA_13_BLADE_MISO N/A
+    12 [0] PA_12_BLADE_UPOMI N/A
+
+    11 [0] PA_11_BLADE_UPIMO N/A
+    10 [0] PA_10_I2C_SCL N/A
+    09 [0] PA_09_I2C_SDA N/A
+    08 [0] PA_08_SD_CS_MCDA3 N/A
+
+    07 [0] PA_07_HSMCI_MCDA2 N/A
+    06 [0] PA_06_SERVO N/A
+    05 [0] PA_05_HSMCI_MCDA0 N/A
+    04 [0] PA_04_HSMCI_MCCDA N/A
+
+    03 [0] PA_03_HSMCI_MCCK N/A
+    02 [0] PA_02_SD_DETECT N/A
+    01 [0] PA_01_SD_WP N/A
+    00 [0] PA_00_TP54 N/A
+*/
+
+#define PIOB_REHLSR_INIT (u32)0x00000000
+/*
+    31 [0] PB_31_
+    30 [0] PB_30_
+    29 [0] PB_29_
+    28 [0] PB_28_
+
+    27 [0] PB_27_
+    26 [0] PB_26_
+    25 [0] PB_25_
+    24 [0] PB_24_ANT_SRDY N/A
+
+    23 [0] PB_23_ANT_MRDY N/A
+    22 [0] PB_22_ANT_USPI2_CS N/A
+    21 [0] PB_21_ANT_RESET N/A
+    20 [0] PB_20_LED_RED N/A
+
+    19 [0] PB_19_LED_GRN N/A
+    18 [0] PB_18_LED_BLU N/A
+    17 [0] PB_17_LED_YLW N/A
+    16 [0] PB_16_LED_CYN N/A
+
+    15 [0] PB_15_LED_ORG N/A
+    14 [0] PB_14_LED_PRP N/A
+    13 [0] PB_13_LED_WHT N/A
+    12 [0] PB_12_LCD_BL_BLU N/A
+
+    11 [0] PB_11_LCD_BL_GRN N/A
+    10 [0] PB_10_LCD_BL_RED N/A
+    09 [0] PB_09_LCD_RST N/A
+    08 [0] PB_08_LIMIT1 N/A
+
+    07 [0] PB_07_LIMIT2 N/A
+    06 [0] PB_06_TP58 N/A
+    05 [0] PB_05_TP56 N/A
+    04 [0] PB_04_BLADE_AN1 N/A
+
+    03 [0] PB_03_BLADE_AN0 N/A
+    02 [0] PB_02_BUTTON3 N/A
+    01 [0] PB_01_BUTTON2 N/A
+    00 [0] PB_00_BUTTON1 N/A
 */
 
 /* PIO Write Protect Mode Register PIO_WPMR

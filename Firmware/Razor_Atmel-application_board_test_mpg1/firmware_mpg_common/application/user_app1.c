@@ -43,6 +43,7 @@ All Global variable names shall start with "G_UserApp1"
 /* New variables */
 volatile u32 G_u32UserApp1Flags;                       /* Global state flags */
 
+volatile bool G_LimitSwitchesActive[TOTAL_LIMIT_SWITCHES]; 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* Existing variables (defined in other files -- should all contain the "extern" keyword) */
@@ -97,12 +98,12 @@ void UserApp1Initialize(void)
     LCDMessage(LINE1_START_ADDR, UserApp1_au8IdleMessage);
     UserApp1_StateMachine = UserApp1SM_Idle;
     
-    //Set up PWM Channel 2 for SERVO, which is operated using GPIO -> PA_06 
+    //Set up PWM Channel 2 for SERVO, which is operated using GPIO -> PA_06_SERVO 
     AT91C_BASE_PWMC_CH2->PWMC_CMR = PWM_CMR2_INIT;
-    AT91C_BASE_PWMC_CH2->PWMC_CPRDR    = PWM_CPRD2_INIT;
+    AT91C_BASE_PWMC_CH2->PWMC_CPRDR    = PWM_CPRD2_INIT; /* Period is set to 20 ms, or 60,000 cycles of the scaled 3Mhz clock */
     AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = PWM_CPRD2_INIT;
-    AT91C_BASE_PWMC_CH2->PWMC_CDTYR    = PWM_CDTY2_INIT; /* initialize with 5% duty -> should correspond to 0 degrees */
-    AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = PWM_CDTY2_INIT; /* Latch CDTY values */
+    AT91C_BASE_PWMC_CH2->PWMC_CDTYR    = PWM_CDTY2_INIT; /* Duty is inialized to 2ms, which is 10% duty cycle, this should put the arm around nuetral position*/
+    AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = PWM_CDTY2_INIT; 
     
     AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
   }
@@ -166,11 +167,15 @@ static void UserApp1SM_Idle(void)
   if(IsButtonPressed(BUTTON0)) {
     if(!button0Active && !button1Active) {
       button0Active = TRUE;
+      
+      /*
+      For hospital bed model this is commented out, as a servo is being used instead of an actuator
       u32 *pu32SetAddress;
       //build address for Actuator Set output data register (SODR)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_SODR) + 0x80;
       //Turn Actuator ON
       *pu32SetAddress = PB_05_ACTUATOR_UP;
+      */
       
       au8CurrentMessage = &au8UpMessage;  
     }
@@ -190,11 +195,15 @@ static void UserApp1SM_Idle(void)
   }
   else {
       button0Active = FALSE;
+      
+      /*
+      For hospital bed model this is commented out, as a servo is being used instead of an actuator
       u32 *pu32SetAddress;
       //build address for Actuator Set output data register (CODR)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_CODR) + 0x80;
       //Turn Actuator OFF
       *pu32SetAddress = PB_05_ACTUATOR_UP;
+      */
   }
   /* end button 0 */
   
@@ -204,10 +213,13 @@ static void UserApp1SM_Idle(void)
     if(!button1Active && !button0Active) {
       button1Active = TRUE;
       u32 *pu32SetAddress;
+      /*
+      For hospital bed model this is commented out, as a servo is being used instead of an actuator
       //build address for Actuator Set output data register (SODR)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_SODR) + 0x80;
       //Turn Actuator ON
       *pu32SetAddress = PB_08_ACTUATOR_DOWN;
+      */
       
       au8CurrentMessage = &au8DownMessage;
       
@@ -228,11 +240,15 @@ static void UserApp1SM_Idle(void)
   }
   else {
       button1Active = FALSE;
+      
+      /*
+      For hospital bed model this is commented out, as a servo is being used instead of an actuator
       u32 *pu32SetAddress;
       //build address for Actuator Set output data register (CODR)
       pu32SetAddress = (u32*)&(AT91C_BASE_PIOA->PIO_CODR) + 0x80;
       //Turn Actuator OFF
       *pu32SetAddress = PB_08_ACTUATOR_DOWN;
+      */
   }
   /* end button 1 */
   
@@ -248,29 +264,12 @@ static void UserApp1SM_Idle(void)
       au8LastMessage = au8CurrentMessage;
   }
   
-  
+  //Currently Button 2 and 3 are unused
   if(WasButtonPressed(BUTTON2)) {
     ButtonAcknowledge(BUTTON2);
-    if(currentServoPeriod < PWM_CPRD2_MAX ) {
-      currentServoPeriod = currentServoPeriod + 500;
-      
-      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
-      
-      AT91C_BASE_PWMC_CH2->PWMC_CPRDR = currentServoPeriod;
-      AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = currentServoPeriod; 
-      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
-    }
   }
   if(WasButtonPressed(BUTTON3)) {
     ButtonAcknowledge(BUTTON3);
-    if(currentServoPeriod > PWM_CPRD2_MIN ) {
-      currentServoPeriod = currentServoPeriod - 500;
-      
-      AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
-      AT91C_BASE_PWMC_CH2->PWMC_CPRDR = currentServoPeriod;
-      AT91C_BASE_PWMC_CH2->PWMC_CPRDUPDR = currentServoPeriod; 
-      AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2; 
-    } 
   }
   
 } /* end UserApp1SM_Idle() */
