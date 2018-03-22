@@ -274,10 +274,13 @@ void PIOB_IrqHandler(void)
   
   if(u32LimitSwitchInterrupts) {
     if(u32LimitSwitchInterrupts & PB_08_LIMIT1) {
-      G_LimitSwitchesActive[0] = TRUE;
+      if(G_LimitSwitchesActive[0]) G_LimitSwitchesActive[0] = FALSE;
+      else G_LimitSwitchesActive[0] = TRUE;
     }
-    else if (u32LimitSwitchInterrupts & PB_07_LIMIT2) {
-      G_LimitSwitchesActive[1] = TRUE;
+    if (u32LimitSwitchInterrupts & PB_07_LIMIT2) {
+      if(G_LimitSwitchesActive[1]) G_LimitSwitchesActive[1] = FALSE;
+      else G_LimitSwitchesActive[1] = TRUE;
+    }
   }
 
   /* Clear the PIOB pending flag and exit */

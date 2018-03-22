@@ -2218,9 +2218,9 @@ For now, don't worry about explictly disabling any write capability.
     11 [0] PB_11_LCD_BL_GRN N/A
     10 [0] PB_10_LCD_BL_RED N/A
     09 [0] PB_09_LCD_RST N/A
-    08 [0] PB_08_LIMIT1 additional interrup modes enabled
+    08 [0] PB_08_LIMIT1 additional interrupt modes enabled
 
-    07 [0] PB_07_LIMIT2 additional interrup modes enabled
+    07 [0] PB_07_LIMIT2 additional interrupt modes enabled
     06 [0] PB_06_TP58 N/A
     05 [0] PB_05_TP56 N/A
     04 [0] PB_04_BLADE_AN1 N/A
@@ -2504,7 +2504,7 @@ If the AIMER register value is 1, this register is used to select falling edge o
     00 [0] PB_00_BUTTON1 N/A
 */
 
-/* PIO Falling Edge/Low Level Select Register
+/* PIO Rising Edge/High Level Select Register
 If the AIMER register value is 1, this register is used to select rising edge or high level detection
 0: No effect
 1: Selects rising edge or high level detection, depending on the values in PIO_ESR and PIO_LSR registers
@@ -2552,7 +2552,7 @@ If the AIMER register value is 1, this register is used to select rising edge or
     00 [0] PA_00_TP54 N/A
 */
 
-#define PIOB_REHLSR_INIT (u32)0x00000000
+#define PIOB_REHLSR_INIT (u32)0x00000180
 /*
     31 [0] PB_31_
     30 [0] PB_30_
@@ -2582,9 +2582,9 @@ If the AIMER register value is 1, this register is used to select rising edge or
     11 [0] PB_11_LCD_BL_GRN N/A
     10 [0] PB_10_LCD_BL_RED N/A
     09 [0] PB_09_LCD_RST N/A
-    08 [0] PB_08_LIMIT1 N/A
+    08 [1] PB_08_LIMIT1 select rising edge detection
 
-    07 [0] PB_07_LIMIT2 N/A
+    07 [1] PB_07_LIMIT2 select rising edge detection
     06 [0] PB_06_TP58 N/A
     05 [0] PB_05_TP56 N/A
     04 [0] PB_04_BLADE_AN1 N/A

@@ -1,4 +1,4 @@
-"C:\Users\Michael\Development\Embedded\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\application\main.c"
+"C:\Users\Michael\Documents\GitHub\helping-hand\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\application\main.c"
 -std=c11
 -ferror-limit=0
 -I

@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\Michael\Development\Embedded\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.general.xcl" --backend -f "C:\Users\Michael\Development\Embedded\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\Michael\Documents\GitHub\helping-hand\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.general.xcl" --backend -f "C:\Users\Michael\Documents\GitHub\helping-hand\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.driver.xcl" 
 }
 else
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\Michael\Development\Embedded\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\Michael\Development\Embedded\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "C:\Users\Michael\Documents\GitHub\helping-hand\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\Michael\Documents\GitHub\helping-hand\Firmware\Razor_Atmel-application_board_test_mpg1\firmware_mpgl1\iar_7_20_1\settings\mpgl1-efmw-01.Release.driver.xcl" 
 }

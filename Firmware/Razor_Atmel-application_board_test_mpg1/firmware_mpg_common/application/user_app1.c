@@ -106,6 +106,15 @@ void UserApp1Initialize(void)
     AT91C_BASE_PWMC_CH2->PWMC_CDTYUPDR = PWM_CDTY2_INIT; 
     
     AT91C_BASE_PWMC->PWMC_ENA = AT91C_PWMC_CHID2;
+    
+    /*Initialize interrupts for the limit switches */
+    u32 u32PortBInterruptMask = (PB_08_LIMIT1 | PB_07_LIMIT2);
+    AT91C_BASE_PIOB->PIO_IER |= u32PortBInterruptMask;
+    // Read ISR register to clear any existing flags
+    u32PortBInterruptMask = AT91C_BASE_PIOB->PIO_ISR;
+    // Configure the NVIC to ensure PIOB interrupts are active
+    NVIC_ClearPendingIRQ(IRQn_PIOB);
+    NVIC_EnableIRQ(IRQn_PIOB);
   }
   else
   {
@@ -164,7 +173,7 @@ static void UserApp1SM_Idle(void)
   
   // button 0 controls tilting UP. Should not actuate if button 1 is also being pressed
   /* start button 0  */
-  if(IsButtonPressed(BUTTON0)) {
+  if(IsButtonPressed(BUTTON0) && !G_LimitSwitchesActive[0]) {
     if(!button0Active && !button1Active) {
       button0Active = TRUE;
       
@@ -179,7 +188,7 @@ static void UserApp1SM_Idle(void)
       
       au8CurrentMessage = &au8UpMessage;  
     }
-        //For DEMO only -> increase servo angle
+    //For DEMO only -> increase servo angle as long as it is within its upper bound
     if(currentServoDty < (PWM_CDTY2_MAX + 1)) {
       currentServoDty= currentServoDty + 1;
       
@@ -209,7 +218,7 @@ static void UserApp1SM_Idle(void)
   
   // button 1 controls tilting DOWN. Should not actuate if button 0 is also being pressed
   /* start button 1 */
-  if(IsButtonPressed(BUTTON1)) {
+  if(IsButtonPressed(BUTTON1) && !G_LimitSwitchesActive[1]) {
     if(!button1Active && !button0Active) {
       button1Active = TRUE;
       u32 *pu32SetAddress;
@@ -251,7 +260,7 @@ static void UserApp1SM_Idle(void)
       */
   }
   /* end button 1 */
-  
+
   /* if system is idle, set idle message */
   if (!button0Active && !button1Active) {
       au8CurrentMessage = &UserApp1_au8IdleMessage;
