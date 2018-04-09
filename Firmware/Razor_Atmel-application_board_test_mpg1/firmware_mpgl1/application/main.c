@@ -69,10 +69,7 @@ void main(void)
   AntApiInitialize();
 
   /* Application initialization */
-  BoardTestInitialize();
-  UserApp1Initialize();
-  UserApp2Initialize();
-  UserApp3Initialize();
+  TiltControllerInitialize();
 
   /* Exit initialization */
   SystemStatusReport();
@@ -98,10 +95,7 @@ void main(void)
     AntApiRunActiveState();
 
     /* Applications */
-    //BoardTestRunActiveState();
-    UserApp1RunActiveState();
-    //UserApp2RunActiveState();
-    //UserApp3RunActiveState();
+    TiltControllerRunActiveState();
     
     /* System sleep*/
     HEARTBEAT_OFF();

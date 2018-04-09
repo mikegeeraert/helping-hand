@@ -1146,7 +1146,7 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Normal.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
@@ -1236,7 +1236,7 @@
                 </option>
                 <option>
                     <name>TrustZone</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -1362,7 +1362,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>CCLibConfigHeader</name>
@@ -1403,7 +1403,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>1</state>
+                    <state>3</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules98</name>
@@ -1729,7 +1729,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>###Unitialized###</state>
+                    <state>mpgl1-efmw-01.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -2214,13 +2214,7 @@
                 <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\music.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app1.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app2.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app3.h</name>
+                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\tilt_controller.h</name>
             </file>
         </group>
         <group>
@@ -2235,13 +2229,7 @@
                 <name>$PROJ_DIR$\..\application\mpgl1_board_test.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app1.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app2.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\user_app3.c</name>
+                <name>$PROJ_DIR$\..\..\firmware_mpg_common\application\tilt_controller.c</name>
             </file>
         </group>
     </group>

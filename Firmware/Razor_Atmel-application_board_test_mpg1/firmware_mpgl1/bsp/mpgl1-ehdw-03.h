@@ -395,7 +395,7 @@ counter must be set at 1280. */
 #define PA_23_ANT_USPI2_MOSI     (u32)0x00800000
 #define PA_22_ANT_USPI2_MISO     (u32)0x00400000 
 #define PA_21_SD_USPI1_MISO      (u32)0x00200000
-#define PA_20_SD_USPI1_MOSI      (u32)0x00100000
+#define PA_20_IR_TRANSMITTER     (u32)0x00100000
 #define PA_19_DEBUG_U0_PIMO      (u32)0x00080000
 #define PA_18_DEBUG_U0_POMI      (u32)0x00040000
 #define PA_17_BUTTON0            (u32)0x00020000
@@ -466,7 +466,7 @@ counter must be set at 1280. */
 0: No effect
 1: Pin is controlled by PIO
 */
-#define PIOA_PER_INIT (u32)0x84030007
+#define PIOA_PER_INIT (u32)0x84130007
 /* 
     31 [1] PA_31_HEARTBEAT PIO control enabled
     30 [0] PA_30_AN_DEMO PIO control not enabled
@@ -481,7 +481,7 @@ counter must be set at 1280. */
     23 [0] PA_23_ANT_USPI2_MOSI PIO control not enabled
     22 [0] PA_22_ANT_USPI2_MISO PIO control not enabled
     21 [0] PA_21_SD_USPI1_MISO PIO control not enabled
-    20 [0] PA_20_SD_USPI1_MOSI PIO control not enabled
+    20 [1] PA_20_IR_TRANSMITTER control enabled
 
     19 [0] PA_19_DEBUG_U0_PIMO PIO control not enabled
     18 [0] PA_18_DEBUG_U0_POMI PIO control not enabled
@@ -557,7 +557,7 @@ counter must be set at 1280. */
 0: No effect
 1: Pin is controlled by corresponding peripheral
 */
-#define PIOA_PDR_INIT (u32)0x7BFCFFF8
+#define PIOA_PDR_INIT (u32)0x7BECFFF8
 /* 
     31 [0] PA_31_HEARTBEAT not controlled by peripheral
     30 [1] PA_30_AN_DEMO controlled by peripheral
@@ -572,7 +572,7 @@ counter must be set at 1280. */
     23 [1] PA_23_ANT_USPI2_MOSI controlled by peripheral
     22 [1] PA_22_ANT_USPI2_MISO controlled by peripheral
     21 [1] PA_21_SD_USPI1_MISO controlled by peripheral
-    20 [1] PA_20_SD_USPI1_MOSI controlled by peripheral
+    20 [0] PA_20_IR_TRANSMITTER not controlled by peripheral
 
     19 [1] PA_19_DEBUG_U0_PIMO controlled by peripheral
     18 [1] PA_18_DEBUG_U0_POMI controlled by peripheral
@@ -663,7 +663,7 @@ Configures the pin as an output or input.
     23 [0] PA_23_ANT_USPI2_MOSI input
     22 [1] PA_22_ANT_USPI2_MISO output enabled
     21 [0] PA_21_SD_USPI1_MISO input input
-    20 [1] PA_20_SD_USPI1_MOSI output enabled
+    20 [1] PA_20_IR_TRANSMITTER output enabled
 
     19 [0] PA_19_DEBUG_U0_PIMO input
     18 [1] PA_18_DEBUG_U0_POMI output enabled
@@ -753,7 +753,7 @@ Configures the pin as an output or input.
     23 [1] PA_23_ANT_USPI2_MOSI input
     22 [0] PA_22_ANT_USPI2_MISO output 
     21 [1] PA_21_SD_USPI1_MISO input 
-    20 [0] PA_20_SD_USPI1_MOSI output 
+    20 [0] PA_20_IR_TRANSMITTER output 
 
     19 [1] PA_19_DEBUG_U0_PIMO input
     18 [0] PA_18_DEBUG_U0_POMI output 
@@ -843,7 +843,7 @@ Configures the pin as an output or input.
     23 [0] PA_23_ANT_USPI2_MOSI no glitch filter
     22 [0] PA_22_ANT_USPI2_MISO no glitch filter
     21 [0] PA_21_SD_USPI1_MISO no glitch filter
-    20 [0] PA_20_SD_USPI1_MOSI no glitch filter
+    20 [0] PA_20_IR_TRANSMITTER no glitch filter
 
     19 [0] PA_19_DEBUG_U0_PIMO no glitch filter
     18 [0] PA_18_DEBUG_U0_POMI no glitch filter
@@ -933,7 +933,7 @@ Configures the pin as an output or input.
     23 [0] PA_23_ANT_USPI2_MOSI no input filter
     22 [0] PA_22_ANT_USPI2_MISO no input filter
     21 [0] PA_21_SD_USPI1_MISO no input filter
-    20 [0] PA_20_SD_USPI1_MOSI no input filter
+    20 [0] PA_20_IR_TRANSMITTER no input filter
 
     19 [0] PA_19_DEBUG_U0_PIMO no input filter
     18 [0] PA_18_DEBUG_U0_POMI no input filter
@@ -1024,7 +1024,7 @@ Default start-up IO values are held here.
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -1115,7 +1115,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -1205,7 +1205,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI
     22 [0] PA_22_ANT_USPI2_MISO
     21 [0] PA_21_SD_USPI1_MISO
-    20 [0] PA_20_SD_USPI1_MOSI
+    20 [0] PA_20_IR_TRANSMITTER
 
     19 [0] PA_19_DEBUG_U0_PIMO
     18 [0] PA_18_DEBUG_U0_POMI
@@ -1295,7 +1295,7 @@ Initial output values are stored here.
     23 [1] PA_23_ANT_USPI2_MOSI not open drain
     22 [1] PA_22_ANT_USPI2_MISO not open drain
     21 [1] PA_21_SD_USPI1_MISO not open drain
-    20 [1] PA_20_SD_USPI1_MOSI not open drain
+    20 [1] PA_20_IR_TRANSMITTER not open drain
 
     19 [1] PA_19_DEBUG_U0_PIMO not open drain
     18 [1] PA_18_DEBUG_U0_POMI not open drain
@@ -1385,7 +1385,7 @@ Initial output values are stored here.
     23 [1] PA_23_ANT_USPI2_MOSI no pull-up
     22 [1] PA_22_ANT_USPI2_MISO no pull-up
     21 [1] PA_21_SD_USPI1_MISO no pull-up
-    20 [1] PA_20_SD_USPI1_MOSI no pull-up
+    20 [1] PA_20_IR_TRANSMITTER no pull-up
 
     19 [1] PA_19_DEBUG_U0_PIMO no pull-up
     18 [1] PA_18_DEBUG_U0_POMI no pull-up
@@ -1475,7 +1475,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI no pull-up
     22 [0] PA_22_ANT_USPI2_MISO no pull-up
     21 [0] PA_21_SD_USPI1_MISO no pull-up
-    20 [0] PA_20_SD_USPI1_MOSI no pull-up
+    20 [0] PA_20_IR_TRANSMITTER no pull-up
 
     19 [0] PA_19_DEBUG_U0_PIMO no pull-up
     18 [0] PA_18_DEBUG_U0_POMI no pull-up
@@ -1551,7 +1551,7 @@ Initial output values are stored here.
 0: Assigns the I/O line to the Peripheral A function.
 1: Assigns the I/O line to the Peripheral B function.
 */
-#define PIOA_ABSR_INIT (u32)0x7B000040
+#define PIOA_ABSR_INIT (u32)0x7B100040
 /* 
     31 [0] PA_31_HEARTBEAT N/A
     30 [1] PA_30_AN_DEMO PERIPHERAL B
@@ -1566,7 +1566,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI PERIPHERAL A
     22 [0] PA_22_ANT_USPI2_MISO PERIPHERAL A
     21 [0] PA_21_SD_USPI1_MISO PERIPHERAL A
-    20 [0] PA_20_SD_USPI1_MOSI PERIPHERAL A
+    20 [1] PA_20_IR_TRANSMITTER PERIPHERAL B
 
     19 [0] PA_19_DEBUG_U0_PIMO PERIPHERAL A
     18 [0] PA_18_DEBUG_U0_POMI PERIPHERAL A
@@ -1656,7 +1656,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI
     22 [0] PA_22_ANT_USPI2_MISO
     21 [0] PA_21_SD_USPI1_MISO
-    20 [0] PA_20_SD_USPI1_MOSI
+    20 [0] PA_20_IR_TRANSMITTER
 
     19 [0] PA_19_DEBUG_U0_PIMO
     18 [0] PA_18_DEBUG_U0_POMI
@@ -1746,7 +1746,7 @@ Initial output values are stored here.
     23 [0] PA_23_ANT_USPI2_MOSI
     22 [0] PA_22_ANT_USPI2_MISO
     21 [0] PA_21_SD_USPI1_MISO
-    20 [0] PA_20_SD_USPI1_MOSI
+    20 [0] PA_20_IR_TRANSMITTER
 
     19 [0] PA_19_DEBUG_U0_PIMO
     18 [0] PA_18_DEBUG_U0_POMI
@@ -1874,7 +1874,7 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
 0: No effect
 1: Enables writing PIO_ODSR for the I/O line.
 */
-#define PIOA_OWER_INIT (u32)0xB4010040
+#define PIOA_OWER_INIT (u32)0xB4110040
 /* 
     31 [1] PA_31_HEARTBEAT write enabled
     30 [0] PA_30_AN_DEMO
@@ -1889,7 +1889,7 @@ Tdiv_slclk = 2*(DIV+1)*Tslow_clock.
     23 [0] PA_23_ANT_USPI2_MOSI
     22 [0] PA_22_ANT_USPI2_MISO
     21 [0] PA_21_SD_USPI1_MISO
-    20 [0] PA_20_SD_USPI1_MOSI
+    20 [1] PA_20_IR_TRANSMITTER
 
     19 [0] PA_19_DEBUG_U0_PIMO
     18 [0] PA_18_DEBUG_U0_POMI
@@ -1980,7 +1980,7 @@ For now, don't worry about explictly disabling any write capability.
     23 [0] PA_23_ANT_USPI2_MOSI
     22 [0] PA_22_ANT_USPI2_MISO
     21 [0] PA_21_SD_USPI1_MISO
-    20 [0] PA_20_SD_USPI1_MOSI
+    20 [0] PA_20_IR_TRANSMITTER
 
     19 [0] PA_19_DEBUG_U0_PIMO
     18 [0] PA_18_DEBUG_U0_POMI
@@ -2070,7 +2070,7 @@ For now, don't worry about explictly disabling any write capability.
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2160,7 +2160,7 @@ For now, don't worry about explictly disabling any write capability.
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2251,7 +2251,7 @@ If the AIMER register value is 1, this register is used to select edge detection
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2342,7 +2342,7 @@ If the AIMER register value is 1, this register is used to select level detectio
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2433,7 +2433,7 @@ If the AIMER register value is 1, this register is used to select falling edge o
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2524,7 +2524,7 @@ If the AIMER register value is 1, this register is used to select rising edge or
     23 [0] PA_23_ANT_USPI2_MOSI N/A
     22 [0] PA_22_ANT_USPI2_MISO N/A
     21 [0] PA_21_SD_USPI1_MISO N/A
-    20 [0] PA_20_SD_USPI1_MOSI N/A
+    20 [0] PA_20_IR_TRANSMITTER N/A
 
     19 [0] PA_19_DEBUG_U0_PIMO N/A
     18 [0] PA_18_DEBUG_U0_POMI N/A
@@ -2719,6 +2719,7 @@ $$$$$ PWM and Timer setup values
 #define PWM_CMR0_INIT (u32)0x00000004
 #define PWM_CMR1_INIT (u32)0x00000004
 #define PWM_CMR2_INIT AT91C_PWMC_CPRE_MCK_DIV_16 //servo clock is scaled by 16 unlike the buzzers 
+
 /*
     31 [0] Reserved
     30 [0] "
@@ -2783,6 +2784,11 @@ Set the period for servo on channel 2 at 50hz
 Set the initial duty cycle for the servo on channel 2 as 500 micro seconds
 500us/20ms * 60 000 ticks -> 1, 500 ticks
 
+IR TRANSMITTER: since we need a signal of 38.5 kHz, and the clock operates at 48MHz,
+the PWM period must be approximately 0.8 ms
+- 0.8 ms represents 38400 ticks of the Master clock, so we do not need any scaling
+- the duty cycle should be 50%, which is 19200 ticks
+
 In general, the period is 6000000 / frequency and duty is always period / 2. 
 */
 
@@ -2792,12 +2798,14 @@ In general, the period is 6000000 / frequency and duty is always period / 2.
 #define PWM_CDTY1_INIT  (u32)(PWM_CPRD1_INIT << 1)
 
 //Init values for servo - want a 20ms period and a 500 us duty cycle
-#define PWM_CPRD2_MAX   (u32)65000
-#define PWM_CPRD2_MIN   (u32)40000
 #define PWM_CPRD2_INIT  (u32)60000
 #define PWM_CDTY2_MAX   (u32)8000
-#define PWM_CDTY2_MIN   (u32)3700
-#define PWM_CDTY2_INIT  (u32)6000
+#define PWM_CDTY2_MIN   (u32)5000
+#define PWM_CDTY2_INIT  (u32)8000
+
+//Init values for IR Transmitter - want a 38.5kHz signal with 50% duty cycle
+#define PWM_CPRD3_INIT  (u32)38400
+#define PWM_CDTY3_INIT  (u32)19200
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/

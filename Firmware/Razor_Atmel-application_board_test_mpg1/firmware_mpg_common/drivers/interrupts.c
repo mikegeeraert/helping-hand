@@ -24,7 +24,7 @@ extern volatile u32 G_u32SystemFlags;                              /* From main.
 extern volatile bool G_abButtonDebounceActive[TOTAL_BUTTONS];      /* From buttons.c    */
 extern volatile u32 G_au32ButtonDebounceTimeStart[TOTAL_BUTTONS];  /* From buttons.c    */
 
-extern volatile bool G_LimitSwitchesActive[TOTAL_LIMIT_SWITCHES];    /* From user_app1.c  */
+extern volatile bool G_LimitSwitchesActive[TOTAL_LIMIT_SWITCHES];    /* From tilt_controller.c  */
 
 
 /***********************************************************************************************************************

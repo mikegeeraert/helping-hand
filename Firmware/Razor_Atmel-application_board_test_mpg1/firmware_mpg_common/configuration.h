@@ -26,7 +26,7 @@ Runtime switches
 //#define MPGL2_R01                   /* Use with MPGL2-EHDW-01 revision board */
 
 #define DEBUG_MODE                /* Define to enable certain debugging code */
-//#define STARTUP_SOUND              /* Define to include buzzer sound on startup */
+//define STARTUP_SOUND              /* Define to include buzzer sound on startup */
 //#define PRODUCTION_MODE           /* Define to run a faster start-up sequence for production */
 
 //#define USE_SIMPLE_USART0   /* Define to use USART0 as a very simple byte-wise UART for debug purposes */
@@ -89,7 +89,7 @@ Includes
 /* Common application header files */
 #include "debug.h"
 #include "music.h"
-#include "user_app1.h"
+#include "tilt_controller.h"
 #include "user_app2.h"
 #include "user_app3.h"
 

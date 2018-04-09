@@ -1,22 +1,8 @@
 /**********************************************************************************************************************
 File: tilt_controller.c                                                                
 
-----------------------------------------------------------------------------------------------------------------------
-To start a new task using this tilt_controller as a template:
- 1. Copy both tilt_controller.c and tilt_controller.h to the Application directory
- 2. Rename the files yournewtaskname.c and yournewtaskname.h
- 3. Add yournewtaskname.c and yournewtaskname.h to the Application Include and Source groups in the IAR project
- 4. Use ctrl-h (make sure "Match Case" is checked) to find and replace all instances of "tilt_controller" with "yournewtaskname"
- 5. Use ctrl-h to find and replace all instances of "TiltController" with "YourNewTaskName"
- 6. Use ctrl-h to find and replace all instances of "TILT_CONTROLLER" with "YOUR_NEW_TASK_NAME"
- 7. Add a call to YourNewTaskNameInitialize() in the init section of main
- 8. Add a call to YourNewTaskNameRunActiveState() in the Super Loop section of main
- 9. Update yournewtaskname.h per the instructions at the top of yournewtaskname.h
-10. Delete this text (between the dashed lines) and update the Description below to describe your task
-----------------------------------------------------------------------------------------------------------------------
-
 Description:
-This is a tilt_controller.c file template 
+Tilt controller for a modified hospital bed
 
 ------------------------------------------------------------------------------------------------------------------------
 API:
@@ -189,8 +175,9 @@ static void TiltControllerSM_Idle(void)
       au8CurrentMessage = &au8UpMessage;  
     }
     //For DEMO only -> increase servo angle as long as it is within its upper bound
-    if(currentServoDty < (PWM_CDTY2_MAX + 1)) {
-      currentServoDty= currentServoDty + 1;
+    
+    if(currentServoDty > (PWM_CDTY2_MIN - 1)) {
+      currentServoDty= currentServoDty - 1;
       
       AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
       AT91C_BASE_PWMC_CH2->PWMC_CDTYR = currentServoDty;
@@ -234,8 +221,8 @@ static void TiltControllerSM_Idle(void)
       
       
     }
-    if(currentServoDty > (PWM_CDTY2_MIN - 1)) {
-      currentServoDty = currentServoDty - 1;
+    if(currentServoDty < (PWM_CDTY2_MAX + 1)) {
+      currentServoDty = currentServoDty + 1;
       
       AT91C_BASE_PWMC->PWMC_DIS = AT91C_PWMC_CHID2;
       AT91C_BASE_PWMC_CH2->PWMC_CDTYR = currentServoDty;
